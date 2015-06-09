@@ -1,0 +1,15 @@
+CC=i586-mingw32msvc-gcc -O2
+CC_FLAGS=-I/usr/i586-mingw32msvc/include/SDL
+LD_FLAGS=-L./win32 -L/usr/i586-mingw32msvc/lib/SDL -lmingw32 -mwindows -lSDLmain -lSDL -lSDL_ttf
+
+SOURCES=$(wildcard *.c)
+OBJECTS=$(SOURCES:.c=.o)
+
+all: $(OBJECTS)
+	$(CC) $(LD_FLAGS) $(OBJECTS) -o ./win32/main.exe
+
+%.o: %.c
+	$(CC) -c $(CC_FLAGS) $< -o $@
+
+clean:
+	rm -f main $(OBJECTS)
